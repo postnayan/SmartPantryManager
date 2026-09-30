@@ -21,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
     private DatabaseHelper databaseHelper;
     private List<PantryItem> pantryItems;
     private com.google.android.material.button.MaterialButton btnAddIngredient;
+    private com.google.android.material.button.MaterialButton btnSuggestedRecipes;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
         // Get the views from the layout
         recyclerViewPantry = findViewById(R.id.recyclerViewPantry);
         btnAddIngredient = findViewById(R.id.btnAddIngredient);
+        btnSuggestedRecipes = findViewById(R.id.btnSuggestedRecipes);
 
         // RecyclerView Setup
         recyclerViewPantry.setLayoutManager(new LinearLayoutManager(this));
@@ -66,6 +68,15 @@ public class MainActivity extends AppCompatActivity {
         // Opens the Add Ingredient screen
         btnAddIngredient.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, AddIngredient.class);
+            startActivity(intent);
+        });
+
+        btnSuggestedRecipes.setOnClickListener(v -> {
+            Intent intent = new Intent(
+                    MainActivity.this,
+                    SuggestedRecipesActivity.class
+            );
+
             startActivity(intent);
         });
     }

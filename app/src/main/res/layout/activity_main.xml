@@ -36,11 +36,21 @@
         android:layout_height="0dp"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="16dp"
-        app:layout_constraintBottom_toTopOf="@id/btnAddIngredient"
+        app:layout_constraintBottom_toTopOf="@id/btnSuggestedRecipes"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tvPantrySubtitle"
         tools:listitem="@layout/item_pantry" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnSuggestedRecipes"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:text="Suggested Recipes"
+        app:layout_constraintBottom_toTopOf="@id/btnAddIngredient"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnAddIngredient"
