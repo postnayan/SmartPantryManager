@@ -14,9 +14,18 @@ public class PantryAdapter
         extends RecyclerView.Adapter<PantryAdapter.PantryViewHolder> {
 
     private List<PantryItem> pantryItems;
+    private OnItemClickListener listener;
 
-    public PantryAdapter(List<PantryItem> pantryItems) {
+    public interface OnItemClickListener {
+        void onItemClick(PantryItem item);
+    }
+
+    public PantryAdapter(
+            List<PantryItem> pantryItems,
+            OnItemClickListener listener
+    ) {
         this.pantryItems = pantryItems;
+        this.listener = listener;
     }
 
     @Override
@@ -45,6 +54,10 @@ public class PantryAdapter
         } else {
             holder.tvExpiryDate.setVisibility(View.GONE);
         }
+
+        holder.itemView.setOnClickListener(v -> {
+            listener.onItemClick(item);
+        });
     }
 
     @Override

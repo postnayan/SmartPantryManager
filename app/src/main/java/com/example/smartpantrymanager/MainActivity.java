@@ -45,7 +45,21 @@ public class MainActivity extends AppCompatActivity {
 
         pantryItems = databaseHelper.getAllPantryItems();
 
-        pantryAdapter = new PantryAdapter(pantryItems);
+        pantryAdapter = new PantryAdapter(pantryItems, item -> {
+
+            Intent intent = new Intent(
+                    MainActivity.this,
+                    EditIngredient.class
+            );
+
+            intent.putExtra("ITEM_ID", item.getId());
+            intent.putExtra("ITEM_NAME", item.getName());
+            intent.putExtra("ITEM_QUANTITY", item.getQuantity());
+            intent.putExtra("ITEM_UNIT", item.getUnit());
+            intent.putExtra("ITEM_EXPIRY", item.getExpiryDate());
+
+            startActivity(intent);
+        });
 
         recyclerViewPantry.setAdapter(pantryAdapter);
 

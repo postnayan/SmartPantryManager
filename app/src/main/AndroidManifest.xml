@@ -13,6 +13,10 @@
         android:theme="@style/Theme.SmartPantryManager">
 
         <activity
+            android:name=".EditIngredient"
+            android:exported="false" />
+
+        <activity
             android:name=".AddIngredient"
             android:exported="false" />
 
