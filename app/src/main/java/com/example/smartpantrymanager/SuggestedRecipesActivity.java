@@ -13,6 +13,7 @@ import com.example.smartpantrymanager.database.DatabaseHelper;
 import com.example.smartpantrymanager.models.Recipe;
 
 import java.util.List;
+import android.content.Intent;
 
 public class SuggestedRecipesActivity extends AppCompatActivity {
 
@@ -50,8 +51,33 @@ public class SuggestedRecipesActivity extends AppCompatActivity {
         suggestedRecipes =
                 databaseHelper.getSuggestedRecipes();
 
-        recipeAdapter =
-                new RecipeAdapter(suggestedRecipes);
+        recipeAdapter = new RecipeAdapter(
+                suggestedRecipes,
+                recipe -> {
+
+                    Intent intent = new Intent(
+                            SuggestedRecipesActivity.this,
+                            RecipeDetailActivity.class
+                    );
+
+                    intent.putExtra(
+                            "RECIPE_ID",
+                            recipe.getId()
+                    );
+
+                    intent.putExtra(
+                            "RECIPE_NAME",
+                            recipe.getName()
+                    );
+
+                    intent.putExtra(
+                            "RECIPE_INSTRUCTIONS",
+                            recipe.getInstructions()
+                    );
+
+                    startActivity(intent);
+                }
+        );
 
         recyclerViewSuggestedRecipes.setAdapter(recipeAdapter);
 

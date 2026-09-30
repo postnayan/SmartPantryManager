@@ -17,9 +17,18 @@ public class RecipeAdapter
         extends RecyclerView.Adapter<RecipeAdapter.RecipeViewHolder> {
 
     private final List<Recipe> recipes;
+    private final OnRecipeClickListener listener;
 
-    public RecipeAdapter(List<Recipe> recipes) {
+    public interface OnRecipeClickListener {
+        void onRecipeClick(Recipe recipe);
+    }
+
+    public RecipeAdapter(
+            List<Recipe> recipes,
+            OnRecipeClickListener listener
+    ) {
         this.recipes = recipes;
+        this.listener = listener;
     }
 
     @NonNull
@@ -44,6 +53,10 @@ public class RecipeAdapter
         Recipe recipe = recipes.get(position);
 
         holder.tvRecipeName.setText(recipe.getName());
+
+        holder.itemView.setOnClickListener(v ->
+                listener.onRecipeClick(recipe)
+        );
     }
 
     @Override
