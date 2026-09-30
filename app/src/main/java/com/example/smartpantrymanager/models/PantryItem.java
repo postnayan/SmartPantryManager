@@ -9,7 +9,7 @@ public class PantryItem {
     private String unit;
     private String expiryDate;
 
-    // Constructor used when reading an existing item from the database
+    // Used when reading an existing item from the database
     public PantryItem(int id, String name, double quantity, String unit, String expiryDate) {
         this.id = id;
         this.name = name;
@@ -18,7 +18,7 @@ public class PantryItem {
         this.expiryDate = expiryDate;
     }
 
-    // Constructor used when creating a new pantry item
+    // Used when creating a new pantry item
     public PantryItem(String name, double quantity, String unit, String expiryDate) {
         this.name = name;
         this.quantity = quantity;
