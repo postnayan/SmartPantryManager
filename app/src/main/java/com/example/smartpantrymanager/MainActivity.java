@@ -11,8 +11,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.smartpantrymanager.adapters.PantryAdapter;
 import com.example.smartpantrymanager.database.DatabaseHelper;
 import com.example.smartpantrymanager.models.PantryItem;
-
 import java.util.List;
+import android.content.Intent;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -20,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
     private PantryAdapter pantryAdapter;
     private DatabaseHelper databaseHelper;
     private List<PantryItem> pantryItems;
+    private com.google.android.material.button.MaterialButton btnAddIngredient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,19 +36,36 @@ public class MainActivity extends AppCompatActivity {
         // Initialises the database
         databaseHelper = new DatabaseHelper(this);
 
-        // Get the RecyclerView from the layout
+        // Get the views from the layout
         recyclerViewPantry = findViewById(R.id.recyclerViewPantry);
+        btnAddIngredient = findViewById(R.id.btnAddIngredient);
 
-        // Set how the RecyclerView arranges the items
+        // RecyclerView Setup
         recyclerViewPantry.setLayoutManager(new LinearLayoutManager(this));
 
-        // Retrieves all pantry items from SQLite
         pantryItems = databaseHelper.getAllPantryItems();
 
-        // Creates the adapter
         pantryAdapter = new PantryAdapter(pantryItems);
 
-        // Connect the adapter to the RecyclerView
         recyclerViewPantry.setAdapter(pantryAdapter);
+
+        // Opens the Add Ingredient screen
+        btnAddIngredient.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, AddIngredient.class);
+            startActivity(intent);
+        });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        if (databaseHelper != null && pantryAdapter != null) {
+
+            pantryItems.clear();
+            pantryItems.addAll(databaseHelper.getAllPantryItems());
+
+            pantryAdapter.notifyDataSetChanged();
+        }
     }
 }
